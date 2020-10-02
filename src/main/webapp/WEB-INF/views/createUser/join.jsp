@@ -87,7 +87,7 @@
 
         console.log(values);
 
-        axios.post('http://localhost:8080/join', values)
+        axios.post('http://localhost:8098/join', values)
             .then(res => {
                 console.log(res);
                 window.location.href = '/';
@@ -109,7 +109,7 @@
 
         console.log(idVal);
 
-        axios.post('http://localhost:8080/duplicate', idVal)
+        axios.post('http://localhost:8098/duplicate', idVal)
             .then( res => {
                 if(res.data === "유저정보 있음"){
                     alert('사용할 수 없는 아이디 입니다.!');
