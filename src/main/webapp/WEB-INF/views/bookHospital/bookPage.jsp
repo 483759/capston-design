@@ -5,6 +5,13 @@
   Time: 오후 8:53
   To change this template use File | Settings | File Templates.
 --%>
+<%--
+  Created by IntelliJ IDEA.
+  User: un2ge
+  Date: 2020-06-16
+  Time: 오후 7:27
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"
          import="java.sql.*, java.util.*" %>
 <%@ taglib prefix="c"
@@ -35,12 +42,6 @@
 
 </head>
 <body class="is-preload">
-<script>
-  function hospital_view(num){
-    // memo_view.do?_id=5
-    location.href="${path}/book.do?id="+num;
-  }
-</script>
 <header id="header" class="alt">
     <div class="inner">
         <h1>Corona Out</h1>
@@ -52,62 +53,49 @@
 <a th:href="@{/post}">글쓰기</a>
 <a onclick="location.href='/'">Home</a>
 <a onclick="location.href='/hospitalList'">병원</a>
+<p>${dto.userName}님</p>
 
 <div id="hospitalList">
     <div id="wrapper">
-        <form>
-            <table>
-                <tr>
-                    <th>지역</th>
-                    <th>병원/진료소 명</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" list="location">
-                        <datalist id="location">
-                            <option value="경기도"></option>
-                            <option value="강원도"></option>
-                            <option value="충청북도"></option>
-                            <option value="경상북도"></option>
-                        </datalist>
-                    </td>
-                    <td><input type="text" name="hosName"></td>
-                    <td><input type="submit" value="검색"></td>
-                </tr>
-            </table>
-        </form>
-        <table border="1" width="700px">
+        <table id="main_table" class="table table-bordered" >
+            <caption>병원/진료소 예약하기</caption>
             <tr>
-                <th>No</th>
-                <th>ID</th>
-                <th>이름</th>
-                <th>주소</th>
+                <td>병원명</td>
+                <td><input type="text" name="hospital" id="hospital"
+                           background-color="#7F7F7F" value="${dto.userId}" class="form-control" readonly required /> <br /></td>
+            </tr>
+            <tr>
+                <td>지역(시/군)
+                <td><input type="text" name="where" id="where"
+                           value="${dto.userName}" class="form-control" readonly required /> <br /></td>
+            </tr>
+            <tr>
+                <td>예약자명</td>
+                <td><input type="text" name="name" id="name"
+                           value="${dto.userAddress}" class="form-control"  required /> <br /></td>
+            </tr>
+            <tr>
+                <td>예약 일자</td>
+                <td><input type="datetime-local" name="date" value="2020-06-25" class="form-control" /> <br /></td>
+            </tr>
+            <tr>
+                <td>전화번호</td>
+                <td>
+                    <div style="display: inline-block">
+                        <input type="text" name="tel1" class="form-control" value="010" style="width: 80px;display: inline-block" disabled>
+                        <p style="display: inline-block"> - </p>
+                        <input type="text" name="tel2" class="form-control" value="1234" style="width: 80px;display: inline-block"disabled>
+                        <p style="display: inline-block"> - </p>
+                        <input type="text" name="tel3" class="form-control" value="4321" style="width: 80px;display: inline-block"disabled>
+                    </div>
+                </td>
             </tr>
 
-            <c:forEach var="row" items="${map.items}"
-                       varStatus="status"> <!-- varStatus는 변수명을 붙인것 -->
-                <!-- 컨트롤러에서 보낸 map의 items안에 있는 값들을 하나씩 출력 -->
-                <tr>
-                    <td>${status.count}</td>
-                    <!-- 원래 {row._id}가 키값인데 이렇게 쓰면 숫자 뒤에 소수점이 붙어서 나오고, status를 쓰면 중간에 값이 빠질일이 없이 제대로 출력된다.-->
-                    <!-- index 0부터, count 1부터이기 때문에 count를 사용해서 소수점을 제외하고 출력시킨다.-->
 
-                    <td>
-                        ${row.userId}
-                    </td>
-                    <!--작성자이름을 호출한다.-->
-
-                    <td>
-                        <!-- _id가 키값이기 때문에 id를 넘겨서  메모내용으로 넘어간다.-->
-                        <a href="#" onclick="hospital_view('${row.userId}')">${row.userName}</a>
-                    </td>
-                    <td>
-                        <!-- 날짜가 나오는 형식을 지정하기 위해 formatDate태그와 패턴을 사용한다.-->
-                            ${row.userAddress}
-                    </td>
-                </tr>
-            </c:forEach>
+            <tr>
+                <td colspan="2" style="align-content: center"><input type="submit" name="submit" value="MODIFY" class= "btn btn-primary btn-lg"> <input type="button" name="reset"
+                                                                                                                                                        onclick="location.href='/bookList'" value="CANCEL" class= "btn btn-secondary btn-lg"></td>
+            </tr>
         </table>
     </div>
 </div>

@@ -32,6 +32,12 @@ public class MainController {
         return modelAndView;
     }
 
+    @GetMapping("/main")
+    public ModelAndView main() {
+        ModelAndView modelAndView = new ModelAndView("/main");
+        return modelAndView;
+    }
+
     @GetMapping("/join")
     public ModelAndView join() {
         ModelAndView modelAndView = new ModelAndView("createUser/join");
@@ -64,9 +70,9 @@ public class MainController {
          */
     }
 
-    @GetMapping("/bookCheck")
-    public ModelAndView bookCheck() {
-        ModelAndView modelAndView = new ModelAndView("/bookCheck");
+    @GetMapping("/bookPage")
+    public ModelAndView bookPage() {
+        ModelAndView modelAndView = new ModelAndView("/bookPage");
         return modelAndView;
     }
 
@@ -122,5 +128,14 @@ public class MainController {
             return new ResponseEntity("유저정보 있음", HttpStatus.OK);
     }
 
+    @RequestMapping("/book.do")
+    public ModelAndView book(String id) {
+        System.out.println(id);
+        Users userInfo = usersServiceInterface.checkUsers(id);
+        Users dto=usersServiceInterface.getDetail(id);
+        //if(dto==null)System.out.println("No Id");
+        if(userInfo==null)System.out.println("No");
+        return new ModelAndView("/bookHospital/bookPage", "dto", userInfo);
+    }
 
 }

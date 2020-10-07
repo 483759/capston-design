@@ -39,4 +39,10 @@ public class UsersService implements UsersServiceInterface {
         //return (List<Users>) mongoTemplate.find(query, Users.class, "users");
         return usersRepository.findAll();
     }
+    public Users getDetail(String userId) {
+        //id에 해당하는 값 (레코드) 1개를 찾을 경우에는 findById(_id, 클래스, 테이블이름) 사용
+        //return mongoTemplate.findById(userName, Users.class, "users");
+        return usersRepository.findByUserId(userId);
+        //id에 해당되는 자료를 COLLECTION_NAME테이블에서 가져와서 DTO에 저장
+    }
 }
