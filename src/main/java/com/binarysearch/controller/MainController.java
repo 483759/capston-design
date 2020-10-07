@@ -3,12 +3,16 @@ package com.binarysearch.controller;
 import com.binarysearch.dao.UsersServiceInterface;
 import com.binarysearch.domain.Users;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     private final UsersServiceInterface usersServiceInterface;
-    //private final HospitalsServiceInterface hospitalsServiceInterface;
 
     @Autowired
     public MainController(UsersServiceInterface usersServiceInterface) {
@@ -42,20 +45,6 @@ public class MainController {
         return "hi";
     }
 
-    @GetMapping("/hospitalList")
-    public  ModelAndView hospitalList(){
-        ModelAndView modelAndView = new ModelAndView("/chooseHospital/hospitalList");
-        return modelAndView;
-    }
-/*
-    @PostMapping("/hospitalList")
-    public String hospitalList(@RequestBody Hospitals hospitals){
-        hospitalsServiceInterface.saveHospitals(hospitals);
-        return "hi";
-    }
-
- */
-
     @GetMapping("/bookInfo")
     public ModelAndView bookInfo() {
         ModelAndView modelAndView = new ModelAndView("/bookInfo");
@@ -64,7 +53,7 @@ public class MainController {
 
     @GetMapping("/bookList")
     public ModelAndView bookList() {
-        ModelAndView modelAndView = new ModelAndView("/bookList");
+        ModelAndView modelAndView = new ModelAndView("/bookHospital/bookList");
         return modelAndView;
     }
 
@@ -78,6 +67,22 @@ public class MainController {
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView("/login");
         return modelAndView;
+    }
+
+    @GetMapping("/hospitalList")
+    public ModelAndView hospital_List(){
+        Map<String, Object> map=new HashMap<>();
+        List<Users> list=usersServiceInterface.getHospitalList();
+        map.put("items",list);
+        return new ModelAndView("/bookHospital/hospitalList","map",map);
+    }
+
+    @RequestMapping("/hospitalList.do")
+    public ModelAndView hospitalList(){
+        Map<String, Object> map=new HashMap<>();
+        List<Users> list=usersServiceInterface.getHospitalList();
+        map.put("items",list);
+        return new ModelAndView("/hospitalList","map",map);
     }
 
     @PostMapping("/login")
