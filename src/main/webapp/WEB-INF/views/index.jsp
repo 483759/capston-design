@@ -117,7 +117,7 @@
 									<td><input type="button" value="login" onclick="login()"></td>
 									<td><input type="button" value="join" onclick="location.href='/join'"></td>
 								</tr>
-								<tr><td><input type="button" value="Hospital" onclick="location.href='/hospitalList'"></td></tr>
+								<tr><td><input type="button" value="Hospital" onclick="location.href='/bookList'"></td></tr>
 							</table>
 				
 						</form>

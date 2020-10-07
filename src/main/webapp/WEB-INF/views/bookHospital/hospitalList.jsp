@@ -4,9 +4,7 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"
            uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<body>
-<p>HiHi</p>
+
 <table border="1" width="700px">
     <tr>
         <th>No</th>
@@ -36,5 +34,3 @@
         </tr>
     </c:forEach>
 </table>
-</body>
-</html>

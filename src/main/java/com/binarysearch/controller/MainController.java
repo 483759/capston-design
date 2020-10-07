@@ -53,8 +53,15 @@ public class MainController {
 
     @GetMapping("/bookList")
     public ModelAndView bookList() {
+
+        Map<String, Object> map=new HashMap<>();
+        List<Users> list=usersServiceInterface.getHospitalList();
+        map.put("items",list);
+        return new ModelAndView("/bookHospital/bookList","map",map);
+        /*
         ModelAndView modelAndView = new ModelAndView("/bookHospital/bookList");
         return modelAndView;
+         */
     }
 
     @GetMapping("/bookCheck")
@@ -82,7 +89,7 @@ public class MainController {
         Map<String, Object> map=new HashMap<>();
         List<Users> list=usersServiceInterface.getHospitalList();
         map.put("items",list);
-        return new ModelAndView("/hospitalList","map",map);
+        return new ModelAndView("/bookHospital/hospitalList","map",map);
     }
 
     @PostMapping("/login")
