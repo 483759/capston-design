@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 
@@ -83,7 +83,7 @@
 
     console.log(idVal1);
 
-    axios.post('http://localhost:8098/hospital/reserve', idVal1)
+    axios.post('http://localhost:8098/reserve', idVal1)
     .then( res => {
       if(res.data != null){
         alert('해당 병원을 찾았습니다.');
@@ -136,13 +136,6 @@
     </section>
 
     <!-- CTA -->
-    <section id="cta" class="main special">
-        <h2>Capstone Project</h2>
-        <P>Team : Yoo Hyun Suk / Yun I Jin / Kim Han Byeol</p>
-        <ul class="actions">
-            <li><a href="#" class="button big">Move Up</a></li>
-        </ul>
-    </section>
 
     <!-- Main -->
     <!--
@@ -155,16 +148,7 @@
     -->
 
     <!-- Footer -->
-    <footer id="footer">
-        <ul class="icons">
-            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-        <p class="copyright">&copy; 팀 2-14</p>
-    </footer>
+
 
 </div>
 </body>

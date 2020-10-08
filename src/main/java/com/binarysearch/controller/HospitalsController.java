@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/bookHospital")
+@RequestMapping(value="")
 // 이렇게 해놓으면 경로에 무조건 /hospital이 붙음
 public class HospitalsController {
   private final HospitalsServiceInterface hospitalsServiceInterface;
@@ -25,12 +25,6 @@ public class HospitalsController {
   @Autowired
   public HospitalsController(HospitalsServiceInterface hospitalsServiceInterface) {
     this.hospitalsServiceInterface = hospitalsServiceInterface;
-  }
-
-  @GetMapping("/") // localhost:8080/hospital/
-  public ModelAndView sayHi() {
-    ModelAndView modelAndView = new ModelAndView("/index");
-    return modelAndView;
   }
 
   @GetMapping("/reserve") // localhost:8080/hospital/reserve
@@ -45,7 +39,6 @@ public class HospitalsController {
 
     ArrayList<Hospitals> checkHospitals = hospitalsServiceInterface.checkHospitals(val1);
 
-
     if(checkHospitals.isEmpty()){
       return null;
     } else {
@@ -55,7 +48,6 @@ public class HospitalsController {
         System.out.println(h);
         nameList.add(h.getHospitalName());
       }
-
       return nameList;
     }
   }
