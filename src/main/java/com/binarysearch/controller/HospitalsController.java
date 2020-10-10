@@ -2,7 +2,9 @@ package com.binarysearch.controller;
 
 import com.binarysearch.domain.Hospitals;
 import com.binarysearch.dao.HospitalsServiceInterface;
+import com.binarysearch.domain.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,10 @@ public class HospitalsController {
 
   @GetMapping("/reserve") // localhost:8080/hospital/reserve
   public ModelAndView reserve() {
-    ModelAndView modelAndView = new ModelAndView("bookHospital/reserve");
+    Map<String, Object> map=new HashMap<>();
+    List<Hospitals> list=hospitalsServiceInterface.getHospitalList();
+    map.put("items",list);
+    ModelAndView modelAndView = new ModelAndView("bookHospital/reserve","map",map);
     return modelAndView;
   }
 
@@ -51,4 +56,5 @@ public class HospitalsController {
       return nameList;
     }
   }
+
 }

@@ -6,15 +6,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-
-	<!-- Scripts -->
-	<script src="../static/js/jquery.min.js" type="text/javascript"></script>
-	<script src="../static/js/skel.min.js" type="text/javascript"></script>
-	<script src="../static/js/util.js" type="text/javascript"></script>
-	<script src="../static/js/main.js" type="text/javascript"></script>
 
     <style>
         body {
@@ -34,32 +31,86 @@
             text-decoration: none;
         }
 
-        #login_form {
-            font-color: black;
-            opacity: 0.8;
-            border-radius: 10px;
-            width: 400px;
-            padding: 10px;
-            height: 80px;
+
+        form {
+            width: 60%;
+            margin: 60px auto;
+            background: #efefef;
+            padding: 60px 120px 80px 120px;
             text-align: center;
-            position: center;
-
+            -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
         }
 
-        #login {
-
-            opacity: 1.0;
-            color: black;
-            bottom: 10px;
-            left: 50px;
+        label {
+            display: block;
+            position: relative;
+            margin: 40px 0px;
         }
 
-        #find {
+        .label-txt {
+            position: absolute;
+            top: -1.6em;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: .8em;
+            letter-spacing: 1px;
+            color: rgb(120, 120, 120);
+            transition: ease .3s;
+        }
 
-            opacity: 1.0;
-            color: black;
-            bottom: 10px;
-            right: 50px;
+        .input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .line-box {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background: #BCBCBC;
+        }
+
+        .line {
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #8BC34A;
+            transition: ease .6s;
+        }
+
+        .input:focus + .line-box .line {
+            width: 100%;
+        }
+
+        .label-active {
+            top: -3em;
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgb(220, 220, 220);
+            font-weight: bold;
+            color: rgb(120, 120, 120);
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: ease .3s;
+            margin: 50px;
+            width: 150px;
+        }
+
+        button:hover {
+            background: #8BC34A;
+            color: #ffffff;
         }
 
     </style>
@@ -124,6 +175,20 @@
     };
 </script>
 <!-- Header -->
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class = "container">
+        <div class = "navbar-collapse collapse">
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href="/">홈</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/join">회원가입</a></li>
+                <li><a href="/reserve">예약하기</a></li>
+                <li><a href = "#">예약확인</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <header id="header" class="alt">
     <div class="inner">
         <h1>Corona Out</h1>
@@ -132,18 +197,6 @@
 
 </header>
 
-<nav class = "navbar navbar-inverse navbar-fixed-top">
-    <div class = "container">
-        <div class = "navbar-collapse collapse">
-            <ul class = "nav navbar-nav navbar-right">
-                <li><a href = "/">로그인</a></li>
-                <li><a href = "/join">회원가입</a></li>
-                <li><a href = "#">예약하기</a></li>
-                <li><a href = "#">예약확인</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Wrapper -->
         <div id="wrapper">

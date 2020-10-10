@@ -70,9 +70,9 @@
     <div class = "container">
         <div class = "navbar-collapse collapse">
             <ul class = "nav navbar-nav navbar-right">
-                <li><a href = "/">로그인</a></li>
+                <li><a href = "/index">로그인</a></li>
                 <li><a href = "/join">회원가입</a></li>
-                <li><a href = "#">예약하기</a></li>
+                <li><a href = "/reserve">예약하기</a></li>
                 <li><a href = "#">예약확인</a></li>
             </ul>
         </div>

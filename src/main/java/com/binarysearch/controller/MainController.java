@@ -28,13 +28,19 @@ public class MainController {
 
     @GetMapping("/")
     public ModelAndView sayHi() {
-        ModelAndView modelAndView = new ModelAndView("/index");
+        ModelAndView modelAndView = new ModelAndView("/main");
         return modelAndView;
     }
 
     @GetMapping("/main")
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView("/main");
+        return modelAndView;
+    }
+
+    @GetMapping("/index")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("/index");
         return modelAndView;
     }
 

@@ -52,4 +52,14 @@ public class Hospitals {
   public void setHospitalName(String hospitalName) {
     this.hospitalName = hospitalName;
   }
+
+  public Hospitals(String id, String hospitalSigu, String hospitalArea, String hospitalCode,String hospitalPhone,String hospitalName){
+    super();
+    this.id=id;
+    this.hospitalSigu=hospitalSigu;
+    this.hospitalArea=hospitalArea;
+    this.hospitalCode=hospitalCode;
+    this.hospitalPhone=hospitalPhone;
+    this.hospitalName=hospitalName;
+  }
 }

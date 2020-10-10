@@ -23,4 +23,7 @@ public class HospitalsService implements HospitalsServiceInterface {
   public ArrayList<Hospitals> checkHospitals(String doo) {
     return hospitalsRepository.findByHospitalArea(doo);
   }
+  public List<Hospitals> getHospitalList(){
+    return hospitalsRepository.findAll();
+  }
 }

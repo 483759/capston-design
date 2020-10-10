@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HospitalsServiceInterface {
   ArrayList<Hospitals> checkHospitals(String name);
+  List<Hospitals> getHospitalList();
 }
