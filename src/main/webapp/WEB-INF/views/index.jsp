@@ -186,7 +186,7 @@
 
 		console.log(values);
 
-		axios.post('http://localhost:8080/login', values)
+		axios.post('http://localhost:8098/login', values)
 		.then(res => {
 			console.log(res);
 			alert('로그인 성공!');
@@ -203,6 +203,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li><img width="50" src="resources/images/medical-mask.jpg" onclick="location.href='/main'"></li>
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/login">로그인</a></li>
 				<li><a href="/join">회원가입</a></li>

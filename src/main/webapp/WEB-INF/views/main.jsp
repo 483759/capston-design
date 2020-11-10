@@ -4,13 +4,30 @@
 
 <html>
 <head>
+    <%--    <title>Co-Out</title>--%>
+    <%--    <meta charset="utf-8"/>--%>
+    <%--    &lt;%&ndash;    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>&ndash;%&gt;--%>
+    <%--    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>--%>
+    <%--    <link rel="stylesheet" href="resources/css/main.css"/>--%>
+    <%--    <link rel="stylesheet" href="style.css" type="text/css">--%>
+    <%--    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">--%>
+
+    <%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"--%>
+    <%--            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="--%>
+    <%--            crossorigin="anonymous"></script>--%>
+    <%--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>--%>
+
     <title>Co-Out</title>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="resources/css/main.css"/>
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <%--    <link rel="stylesheet" href="style.css" type="text/css">--%>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+
     <style>
         body {
             background-size: 100% 100%;
@@ -29,46 +46,102 @@
             text-decoration: none;
         }
 
-        #login_form {
-            font-color: black;
-            opacity: 0.8;
-            border-radius: 10px;
-            width: 400px;
-            padding: 10px;
-            height: 80px;
+
+        form {
+            width: 100%;
+            margin: 30px auto;
+            background: #efefef;
+            padding: 60px 120px 80px 120px;
             text-align: center;
-            position: center;
-
+            -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
         }
 
-        #login {
-
-            opacity: 1.0;
-            color: black;
-            bottom: 10px;
-            left: 50px;
+        label {
+            display: block;
+            position: relative;
+            margin: 40px 0px;
         }
 
-        #find {
+        .label-txt {
+            position: absolute;
+            top: -1.6em;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: .8em;
+            letter-spacing: 1px;
+            color: rgb(120, 120, 120);
+            transition: ease .3s;
+        }
 
-            opacity: 1.0;
-            color: black;
-            bottom: 10px;
-            right: 50px;
+        .input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .line-box {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background: #BCBCBC;
+        }
+
+        .line {
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #8BC34A;
+            transition: ease .6s;
+        }
+
+        .input:focus + .line-box .line {
+            width: 100%;
+        }
+
+        .label-active {
+            top: -3em;
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgb(220, 220, 220);
+            font-weight: bold;
+            color: rgb(120, 120, 120);
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: ease .3s;
+            margin: 50px;
+            width: 150px;
+        }
+
+        button:hover {
+            background: #8BC34A;
+            color: #ffffff;
         }
 
     </style>
 </head>
 
+
 <body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <!-- Header -->
+<!--navbar -->
 <nav class = "navbar navbar-inverse navbar-fixed-top">
     <div class = "container">
         <div class = "navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><img width="50" src="resources/images/medical-mask.jpg" onclick="location.href='/main'"></li>
+            </ul>
             <ul class = "nav navbar-nav navbar-right">
                 <li><a href = "/index">로그인</a></li>
                 <li><a href = "/join">회원가입</a></li>
@@ -78,6 +151,9 @@
         </div>
     </div>
 </nav>
+<!--navbar -->
+
+
 <header id="header" class="alt">
     <div class="inner">
         <h1>Corona Out</h1>
@@ -87,9 +163,7 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-
-    <!-- Banner -->
-    <section id="intro" class="main">
+    <form>
         <div>
             <table>
                 <thead><h2>코로나바이러스감염증-19(COVID-19) 정보</h2></thead>
@@ -133,12 +207,13 @@
                         코로나바이러스감염증-19
                         감염이 의심되는 경우입니다.
                         <br><br>
-                        조사대상 유증상자는 일반 의료기관에서 검체 채취 시 Ⅷ. 실험실 검사 관리 내용을 숙지하고 시행하시기 바랍니다.
+                        조사대상 유증상자는 일반 의료기관에서 검체 채취 시 실험실 검사 관리 내용을 숙지하고 시행하시기 바랍니다.
                     </td>
                 </tr>
             </table>
         </div>
-    </section>
+    </form>
+
 
     <!-- CTA -->
     <section id="cta" class="main special">

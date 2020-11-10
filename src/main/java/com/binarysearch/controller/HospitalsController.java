@@ -39,22 +39,11 @@ public class HospitalsController {
   }
 
   @PostMapping("/reserve")
-  public ArrayList<String> findName(@RequestBody HashMap<String, String> idVal1) {
+  public ArrayList<Hospitals> findName(@RequestBody HashMap<String, String> idVal1) {
     String val1 = idVal1.get("name");
 
     ArrayList<Hospitals> checkHospitals = hospitalsServiceInterface.checkHospitals(val1);
 
-    if(checkHospitals.isEmpty()){
-      return null;
-    } else {
-      ArrayList<String> nameList = new ArrayList<>();
-
-      for(Hospitals h : checkHospitals) {
-        System.out.println(h);
-        nameList.add(h.getHospitalName());
-      }
-      return nameList;
-    }
+    return ((checkHospitals.size() == 0) ? null : checkHospitals);
   }
-
 }
