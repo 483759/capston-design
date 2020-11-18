@@ -3,6 +3,7 @@ package com.binarysearch.service;
 import com.binarysearch.domain.Hospitals;
 import com.binarysearch.repository.HospitalsRepository;
 import com.binarysearch.dao.HospitalsServiceInterface;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,12 @@ public class HospitalsService implements HospitalsServiceInterface {
   public ArrayList<Hospitals> checkHospitals(String doo) {
     return hospitalsRepository.findByHospitalArea(doo);
   }
+
+  public Optional<Hospitals> getHospital(String id){
+    //return hospitalsRepository.findById(id);
+    return hospitalsRepository.findById(id);
+  }
+
   public List<Hospitals> getHospitalList(){
     return hospitalsRepository.findAll();
   }

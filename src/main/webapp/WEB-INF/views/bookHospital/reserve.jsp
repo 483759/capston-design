@@ -125,6 +125,11 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
+
+  function hospital_view(hId){
+    location.href="/book.do?id="+hId;
+  }
+
   const isSearch = () => {
     let name = $('input[name=name]').val();
 
@@ -155,7 +160,7 @@
           ret = ret.concat("<tr><td>" + num++ + "</td>");
           ret = ret.concat("<td>" + hospital['hospitalSigu'] + "</td>");
           ret = ret.concat("<td>" + hospital['hospitalArea'] + "</td>");
-          ret = ret.concat("<td><a href='reserve1' onclick=hospital_view(" + hospital['id'] + ")>" + hospital['hospitalName'] + "</a></td>");
+          ret = ret.concat("<td><a href='#' onclick=\"location.href='/book.do?id="+hospital['id']+"'\">" + hospital['hospitalName'] + "</a></td>");
           ret = ret.concat("<td>" + hospital['hospitalPhone'] + "</td></tr>");
 
         }
@@ -167,6 +172,7 @@
     });
 
   };
+
 </script>
 
 <!-- Header -->
@@ -213,4 +219,4 @@
 
 </div>
 </body>
-</html>v
+</html>

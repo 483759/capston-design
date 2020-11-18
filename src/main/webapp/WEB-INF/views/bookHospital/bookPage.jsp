@@ -1,59 +1,174 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: un2ge
-  Date: 2020-06-19
-  Time: 오후 8:53
-  To change this template use File | Settings | File Templates.
---%>
-<%--
-  Created by IntelliJ IDEA.
-  User: un2ge
-  Date: 2020-06-16
-  Time: 오후 7:27
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"
-         import="java.sql.*, java.util.*" %>
-<%@ taglib prefix="c"
-           uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"
-           uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
-    <style>
-        .centered {
-            display: table;
-            margin-left: auto;
-            margin-right: auto;
-            display: inline-block;
-        }
-    </style>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="resources/css/main.css"/>
+    <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no"/>
 
+    <style>
+        body {
+            background-size: 100% 100%;
+            color: black;
+            text-align: center;
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+
+        form {
+            width: 100%;
+            margin: 30px auto;
+            background: #efefef;
+            padding: 60px 120px 80px 120px;
+            text-align: center;
+            -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            position: relative;
+            margin: 40px 0px;
+        }
+
+        .label-txt {
+            position: absolute;
+            top: -1.6em;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: .8em;
+            letter-spacing: 1px;
+            color: rgb(120, 120, 120);
+            transition: ease .3s;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .line-box {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background: #BCBCBC;
+        }
+
+        .line {
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #8BC34A;
+            transition: ease .6s;
+        }
+
+        .input:focus + .line-box .line {
+            width: 100%;
+        }
+
+        .label-active {
+            top: -3em;
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgb(220, 220, 220);
+            font-weight: bold;
+            color: rgb(120, 120, 120);
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: ease .3s;
+            margin: 50px;
+            width: 150px;
+        }
+
+        button:hover {
+            background: #8BC34A;
+            color: #ffffff;
+        }
+
+    </style>
 </head>
-<body class="is-preload">
-<header id="header" class="alt">
-    <div class="inner">
-        <h1>Corona Out</h1>
-        <p>COVID-19 맞춤형 병원/선별 진료소 예약 서비스</p>
+
+<body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+  const postReservation=()=>{
+    let userId=$('input[name=name]').val();
+    let hosId=$('input[name=hosId]').val();
+    let resDate=$('input[name=date]').val();
+
+    let values={
+      'userId'  :userId,
+      'hosId'   :hosId,
+      'resDate' :resDate
+    };
+
+    console.log(values);
+
+    axios.post('http://localhost:8098/book', values)
+    .then(res => {
+      console.log(res);
+      window.location.href = '/';
+      alert('예약 완료!');
+    })
+    .catch(err => {
+      console.log(err);
+      alert('예약할 수 없습니다!');
+    });
+  };
+</script>
+
+<!-- Header -->
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+    <div class = "container">
+        <div class = "navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><img width="50" src="resources/images/medical-mask.jpg" onclick="location.href='/'"></li>
+            </ul>
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href="/">홈</a></li>
+                <li><a href="/index">로그인</a></li>
+                <li><a href="/join">회원가입</a></li>
+                <li><a href="/reserve">예약하기</a></li>
+                <li><a href = "#">예약확인</a></li>
+            </ul>
+        </div>
     </div>
+</nav>
 
-</header>
-
-<a th:href="@{/post}">글쓰기</a>
-<a onclick="location.href='/'">Home</a>
-<a onclick="location.href='/hospitalList'">병원</a>
-<p>${dto.userName}님</p>
 
 <div id="hospitalList">
     <div id="wrapper">
@@ -62,17 +177,18 @@
             <tr>
                 <td>병원명</td>
                 <td><input type="text" name="hospital" id="hospital"
-                           background-color="#7F7F7F" value="${dto.userId}" class="form-control" readonly required /> <br /></td>
+                           background-color="#7F7F7F" value="${dto.hospitalName}" class="form-control" readonly required /> <br /></td>
             </tr>
             <tr>
                 <td>지역(시/군)
                 <td><input type="text" name="where" id="where"
-                           value="${dto.userName}" class="form-control" readonly required /> <br /></td>
+                           value="${dto.hospitalSigu}" class="form-control" readonly required /> <br />
+                <input type="text" name="hosId" value="${dto.id}"></td>
             </tr>
-            <tr>
+            <tr>ed
                 <td>예약자명</td>
                 <td><input type="text" name="name" id="name"
-                           value="${dto.userAddress}" class="form-control"  required /> <br /></td>
+                           value="" class="form-control"  required /> <br /></td>
             </tr>
             <tr>
                 <td>예약 일자</td>
@@ -93,31 +209,14 @@
 
 
             <tr>
-                <td colspan="2" style="align-content: center"><input type="submit" name="submit" value="MODIFY" class= "btn btn-primary btn-lg"> <input type="button" name="reset"
+                <td colspan="2" style="align-content: center">
+                    <button input type="button" name="book" onclick="postReservation()">예약하기</button>
+                    <input type="button" name="reset"
                                                                                                                                                         onclick="location.href='/bookList'" value="CANCEL" class= "btn btn-secondary btn-lg"></td>
             </tr>
         </table>
     </div>
 </div>
 </div>
-
-<!-- Footer -->
-<footer id="footer">
-    <ul class="icons">
-        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-        <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-        <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-    </ul>
-    <p class="copyright">&copy; 팀 2-14</p>
-</footer>
-
-<!-- Scripts -->
-<script src="../static/js/jquery.min.js" type="text/javascript"></script>
-<script src="../static/js/skel.min.js" type="text/javascript"></script>
-<script src="../static/js/util.js" type="text/javascript"></script>
-<script src="../static/js/main.js" type="text/javascript"></script>
-
 </body>
 </html>

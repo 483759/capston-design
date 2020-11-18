@@ -5,6 +5,7 @@ import com.binarysearch.dao.HospitalsServiceInterface;
 import com.binarysearch.domain.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
+import java.util.Optional;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,5 +46,18 @@ public class HospitalsController {
     ArrayList<Hospitals> checkHospitals = hospitalsServiceInterface.checkHospitals(val1);
 
     return ((checkHospitals.size() == 0) ? null : checkHospitals);
+  }
+
+
+  @RequestMapping("/book.do")
+  public ModelAndView book(String id) {
+    System.out.println(id);
+    //Hospitals userInfo = hospitalsServiceInterface.checkHospitals(id);
+    Optional<Hospitals> hosInfo=hospitalsServiceInterface.getHospital(id);
+    Hospitals hos=hosInfo.get();
+    //if(dto==null)System.out.println("No Id");
+    //if(userInfo==null)System.out.println("No");
+    return new ModelAndView("bookHospital/bookPage", "dto", hos);
+    //return new ModelAndView("bookHospital/bookPage");
   }
 }

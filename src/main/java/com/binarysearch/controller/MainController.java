@@ -78,7 +78,7 @@ public class MainController {
 
     @GetMapping("/bookPage")
     public ModelAndView bookPage() {
-        ModelAndView modelAndView = new ModelAndView("/bookPage");
+        ModelAndView modelAndView = new ModelAndView("/bookHospital/bookPage");
         return modelAndView;
     }
 
@@ -134,14 +134,5 @@ public class MainController {
             return new ResponseEntity("유저정보 있음", HttpStatus.OK);
     }
 
-    @RequestMapping("/book.do")
-    public ModelAndView book(String id) {
-        System.out.println(id);
-        Users userInfo = usersServiceInterface.checkUsers(id);
-        Users dto=usersServiceInterface.getDetail(id);
-        //if(dto==null)System.out.println("No Id");
-        if(userInfo==null)System.out.println("No");
-        return new ModelAndView("/bookHospital/bookPage", "dto", userInfo);
-    }
 
 }
