@@ -1,20 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
+    <%--    <title>Co-Out</title>--%>
+    <%--    <meta charset="utf-8"/>--%>
+    <%--    &lt;%&ndash;    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>&ndash;%&gt;--%>
+    <%--    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>--%>
+    <%--    <link rel="stylesheet" href="resources/css/main.css"/>--%>
+    <%--    <link rel="stylesheet" href="style.css" type="text/css">--%>
+    <%--    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">--%>
+
+    <%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"--%>
+    <%--            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="--%>
+    <%--            crossorigin="anonymous"></script>--%>
+    <%--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>--%>
+
+    <title>Co-Out</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="resources/css/main.css"/>
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <%--    <link rel="stylesheet" href="style.css" type="text/css">--%>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
 
     <style>
         body {
@@ -115,109 +127,86 @@
             background: #8BC34A;
             color: #ffffff;
         }
+        /*button.btm_image{*/
+        /*    width: 100px;*/
+        /*    height: 100px;*/
+        /*    cursor: pointer;*/
 
+
+        /*}*/
     </style>
 </head>
 
+
 <body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script>
-
-  function hospital_view(hId){
-    location.href="/book.do?id="+hId;
-  }
-
-  const isSearch = () => {
-    let name = $('input[name=name]').val();
-
-    let idVal1 = {
-      'name': name
-    };
-
-    console.log(idVal1);
-
-    axios.post('http://localhost:8098/reserve', idVal1)
-    .then( res => {
-      console.log(res.data);
-      if(res.data === ""){
-        alert('해당 병원을 찾을 수 없습니다.');
-
-        let result = document.getElementById("infotable");
-        result.innerHTML = "";
-
-      }else{
-        alert('해당 병원을 찾았습니다.');
-
-        let result = document.getElementById("infotable");
-        let ret = new String();
-        let data = res.data;
-        var num = 1;
-
-        for(let hospital of data) {
-          ret = ret.concat("<tr><td>" + num++ + "</td>");
-          ret = ret.concat("<td>" + hospital['hospitalSigu'] + "</td>");
-          ret = ret.concat("<td>" + hospital['hospitalArea'] + "</td>");
-          ret = ret.concat("<td><a href='#' onclick=\"location.href='/book.do?id="+hospital['id']+"'\">" + hospital['hospitalName'] + "</a></td>");
-          ret = ret.concat("<td>" + hospital['hospitalPhone'] + "</td></tr>");
-
-        }
-        result.innerHTML = ret;
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
-  };
-
-</script>
 
 <!-- Header -->
+<!--navbar -->
 <nav class = "navbar navbar-inverse navbar-fixed-top">
     <div class = "container">
         <div class = "navbar-collapse collapse">
             <ul class = "nav navbar-nav navbar-right">
-                <li><a href="/">홈</a></li>
-                <%if(session.getAttribute("status")!="111"){%>
-                <li><a href="/login">로그인</a></li>
-                <li><a href = '/jointype'>회원가입</a></li>
-                <%}else{%>
-                <li><a href="/logout">로그아웃</a></li>
-                <%}%>
-                <li><a href = '/reserve'>병원검색</a></li>
-                <li><a href = '/list'>예약확인</a></li>
+                <li><a href = "/">로그인</a></li>
+                <li><a href = "/join">회원가입</a></li>
+                <li><a href = "/reserve">예약하기</a></li>
+                <li><a href = "#">예약확인</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<!--navbar -->
+
+
+<header id="header" class="alt">
+    <div class="inner">
+        <h1>Corona Out</h1>
+        <p>COVID-19 맞춤형 병원/선별 진료소 예약 서비스</p>
+    </div>
+</header>
 
 <!-- Wrapper -->
 <div id="wrapper">
-    <!-- Banner -->
-        <div class="text-center">
-            <form>
-                <input type=hidden name="action" value="insert">
-                <h3>병원 예약하기</h3>
-                <div>
-                    병원 검색 :<!-- 이거 name -->
-                    <input type="text" class="btn btn-dark" name="name">
-                    <input type="button" name="name" value="검색" onclick="isSearch()"
-                           class="btn btn-dark">
-                </div>
-                <table id="infotable">
+    <form>
+        <h3>Sign Up</h3>
+        <label class="input">
 
-                    <%--                    <c:forEach var="row" items="${map.items}"--%>
-                    <%--                               varStatus="status"> <!-- varStatus는 변수명을 붙인것 -->--%>
-                    <%--                        <!-- 컨트롤러에서 보낸 map의 items안에 있는 값들을 하나씩 출력 -->--%>
-                    <%--                        --%>
-                    <%--                    </c:forEach>--%>
-                </table>
-            </form>
-        </div>
+            <img src="../resources/images/hospital.jpg"  style="margin:0px 50px;" width="200" height="200" alt="병원회원가입" onclick="location.href='hjoin'"></button>
+            <img src="../resources/images/couple.jpg" style="margin:0px 50px;" width="200" height="200" alt="개인회원가입" onclick="location.href='join'"></button>
+
+        </label>
+
+    </form>
+
+
+    <!-- CTA -->
+    <section id="cta" class="main special">
+        <h2>Capstone Project</h2>
+        <P>Team : Yoo Hyun Suk / Yun I Jin / Kim Han Byeol</p>
+        <ul class="actions">
+            <li><a href="#" class="button big">Move Up</a></li>
+        </ul>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <p class="copyright">&copy; 팀 2-14</p>
+    </footer>
 
 </div>
+
+<!-- Scripts -->
+<script src="../static/js/jquery.min.js" type="text/javascript"></script>
+<script src="../static/js/skel.min.js" type="text/javascript"></script>
+<script src="../static/js/util.js" type="text/javascript"></script>
+<script src="../static/js/main.js" type="text/javascript"></script>
+
 </body>
 </html>

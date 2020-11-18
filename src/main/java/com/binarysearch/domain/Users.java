@@ -12,6 +12,9 @@ public class Users {
     private String userName;
     private String userTel;
     private String userAddress;
+    private String userType;
+    private String userGender;
+    private String userBirth;
 
     public String getId() {
         return _id;
@@ -54,6 +57,24 @@ public class Users {
         this.userTel = userTel;
     }
 
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userAddress) {
+        this.userGender = userGender;
+    }
+
+
+    public String getUserBirth() {
+        return userBirth;
+    }
+
+    public void setUserBirth(String userAddress) {
+        this.userBirth = userBirth;
+    }
+
+
     public String getUserAddress() {
         return userAddress;
     }
@@ -62,7 +83,16 @@ public class Users {
         this.userAddress = userAddress;
     }
 
-    public Users(String _id, String userId, String userPw, String userName, String userTel, String userAddress){
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userAddress) {
+        this.userType = userType;
+    }
+
+    public Users(String _id, String userId, String userPw, String userName, String userTel, String userAddress,String userType,String userGender, String userBirth){
         super();
         this._id=_id;
         this.userId=userId;
@@ -70,5 +100,8 @@ public class Users {
         this.userName=userName;
         this.userTel=userTel;
         this.userAddress=userAddress;
+        this.userType=userType;
+        this.userGender=userGender;
+        this.userBirth=userBirth;
     }
 }

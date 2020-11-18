@@ -52,12 +52,8 @@ public class HospitalsController {
   @RequestMapping("/book.do")
   public ModelAndView book(String id) {
     System.out.println(id);
-    //Hospitals userInfo = hospitalsServiceInterface.checkHospitals(id);
     Optional<Hospitals> hosInfo=hospitalsServiceInterface.getHospital(id);
     Hospitals hos=hosInfo.get();
-    //if(dto==null)System.out.println("No Id");
-    //if(userInfo==null)System.out.println("No");
     return new ModelAndView("bookHospital/bookPage", "dto", hos);
-    //return new ModelAndView("bookHospital/bookPage");
-  }
+   }
 }

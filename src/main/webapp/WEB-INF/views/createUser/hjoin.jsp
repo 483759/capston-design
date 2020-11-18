@@ -41,10 +41,6 @@
     let userTel = $('input[name=userTel]').val();
     let userAddress = $('input[name=userAddress]').val();
 
-    let userGender = $('input[name=userGender]:checked').val();
-
-
-    let userBirth = $('input[name=userBirth]').val();
 
     let values = {
       'userId'     : userId,
@@ -52,9 +48,7 @@
       'userName'   : userName,
       'userTel'    : userTel,
       'userAddress': userAddress,
-      'userGender' : userGender,
-      'userBirth'  : userBirth,
-      'userType'   : '개인'
+      'userType' : '병원'
 
     };
 
@@ -169,37 +163,13 @@
     </label>
 
     <label class = "input">
-        <p class = "label-txt">NAME</p>
+        <p class = "label-txt">HOSPITAL NAME</p>
         <input type = "text" class = "input" name = "userName">
         <div class = "line-box">
             <div class = "line"></div>
         </div>
     </label>
 
-    <label class = "input">
-        <p class = "label-txt">GENDER</p>
-        <%--        <input type="text" class="input" name="userGender">--%>
-        <div class = "form-check form-check-inline">
-            <space>
-                <input type = "radio" class = "form-check-input" id = "male" name = "userGender" value="male" checked>
-                <label class = "form-check-label" for = "male">male</label>
-            </space>
-            <!-- Material inline 2 -->
-            <space>
-                <input type = "radio" class = "form-check-input" id = "female" name = "userGender" value="female">
-                <label class = "form-check-label" for = "female">female</label>
-            </space>
-
-        </div>
-
-    </label>
-
-    <label class = "input">
-        <p class = "label-txt">DAY OF BIRTH</p>
-        <div>
-            <input type="datetime-local" name="userBirth" value="2020-06-25" class="form-control" />
-        </div>
-    </label>
 
     <label class = "input">
         <p class = "label-txt">PHONE NUM</p>
@@ -216,6 +186,8 @@
             <div class = "line"></div>
         </div>
     </label>
+
+    <p type="text" value="hospital" name="userType"> </p>
 
     <button input type = "button" name = "login" onclick = "signUp()">JOIN</button>
     <button input type = "button" name = "reset" onclick = "location.href='/join'">RESET</button>

@@ -5,6 +5,7 @@ import com.binarysearch.domain.Users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,9 +83,15 @@ public class MainController {
         return modelAndView;
     }
 
-    @GetMapping("/login")
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView("/login");
+    @GetMapping("/conform")
+    public ModelAndView conform(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("loginUser/conform");
+        return modelAndView;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("loginUser/logout");
         return modelAndView;
     }
 
@@ -104,14 +111,23 @@ public class MainController {
         return new ModelAndView("/bookHospital/hospitalList","map",map);
     }
 
+    @GetMapping("/login")
+    public ModelAndView loginGet(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("loginUser/login");
+        return modelAndView;
+    }
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody HashMap<String, String> loginInfo) {
+    public ResponseEntity loginPost(@RequestBody HashMap<String, String> loginInfo, HttpSession session, Model model) {
 
         Users userInfo = usersServiceInterface.checkUsers(loginInfo.get("userId"));
 
         if(userInfo == null){
             return new ResponseEntity("로그인을 할 수 없습니다.", HttpStatus.CONFLICT);
-        }else{
+        }
+        else{
+            model.addAttribute("userInfo", userInfo);
+            session.setAttribute("userInfo", userInfo);
             if (userInfo.getUserPw().equals(loginInfo.get("userPw"))){
                 return new ResponseEntity("로그인 성공", HttpStatus.OK);
             }
@@ -119,6 +135,25 @@ public class MainController {
                 return new ResponseEntity("비밀번호 불일치", HttpStatus.CONFLICT);
             }
         }
+    }
+
+    @GetMapping("/hjoin")
+    public ModelAndView hjoin() {
+        ModelAndView modelAndView = new ModelAndView("createUser/hjoin");
+        return modelAndView;
+    }
+
+    @PostMapping("/hjoin")
+    public String hjoin(@RequestBody Users users) {
+        usersServiceInterface.saveUsers(users);
+        System.out.println(users.getUserId() + " " + users.getUserAddress());
+        return "hi";
+    }
+
+    @GetMapping("/jointype")
+    public ModelAndView jointype() {
+        ModelAndView modelAndView = new ModelAndView("createUser/jointype");
+        return modelAndView;
     }
 
     @PostMapping("/duplicate")

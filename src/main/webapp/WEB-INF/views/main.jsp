@@ -139,14 +139,16 @@
 <nav class = "navbar navbar-inverse navbar-fixed-top">
     <div class = "container">
         <div class = "navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <li><img width="50" src="resources/images/medical-mask.jpg" onclick="location.href='/main'"></li>
-            </ul>
             <ul class = "nav navbar-nav navbar-right">
-                <li><a href = "/index">로그인</a></li>
-                <li><a href = "/join">회원가입</a></li>
-                <li><a href = "/reserve">예약하기</a></li>
-                <li><a href = "#">예약확인</a></li>
+                <li><a href="/">홈</a></li>
+                <%if(session.getAttribute("status")!="111"){%>
+                <li><a href="/login">로그인</a></li>
+                <li><a href = '/jointype'>회원가입</a></li>
+                <%}else{%>
+                <li><a href="/logout">로그아웃</a></li>
+                <%}%>
+                <li><a href = '/reserve'>병원검색</a></li>
+                <li><a href = '/list'>예약확인</a></li>
             </ul>
         </div>
     </div>

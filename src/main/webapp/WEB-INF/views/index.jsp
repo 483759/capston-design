@@ -11,7 +11,7 @@
 	<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="resources/css/main.css"/>
-	<link rel="stylesheet" href="style.css" type="text/css">
+	<%--    <link rel="stylesheet" href="style.css" type="text/css">--%>
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 
 	<style>
@@ -200,17 +200,19 @@
 <!-- Header -->
 <!--navbar -->
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-left">
-				<li><img width="50" src="resources/images/medical-mask.jpg" onclick="location.href='/main'"></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
+<nav class = "navbar navbar-inverse navbar-fixed-top">
+	<div class = "container">
+		<div class = "navbar-collapse collapse">
+			<ul class = "nav navbar-nav navbar-right">
+				<li><a href="/">홈</a></li>
+				<%if(session.getAttribute("status")!="111"){%>
 				<li><a href="/login">로그인</a></li>
-				<li><a href="/join">회원가입</a></li>
-				<li><a href="/reserve">예약하기</a></li>
-				<li><a href="#">예약확인</a></li>
+				<li><a href = '/jointype'>회원가입</a></li>
+				<%}else{%>
+				<li><a href="/logout">로그아웃</a></li>
+				<%}%>
+				<li><a href = '/reserve'>병원검색</a></li>
+				<li><a href = '/list'>예약확인</a></li>
 			</ul>
 		</div>
 	</div>
