@@ -1,18 +1,13 @@
 package com.binarysearch.service;
 
+import com.binarysearch.domain.Login;
 import com.binarysearch.domain.Users;
 import com.binarysearch.repository.UsersRepository;
 import com.binarysearch.dao.UsersServiceInterface;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Repository;
 
 @Service
 public class UsersService implements UsersServiceInterface {
@@ -38,6 +33,9 @@ public class UsersService implements UsersServiceInterface {
         //Query query=new Query();
         //return (List<Users>) mongoTemplate.find(query, Users.class, "users");
         return usersRepository.findAll();
+    }
+    public Users login(Login login) throws Exception{
+        return usersRepository.findByUserId(login.getUserId());
     }
     public Users getDetail(String userId) {
         //id에 해당하는 값 (레코드) 1개를 찾을 경우에는 findById(_id, 클래스, 테이블이름) 사용

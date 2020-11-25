@@ -63,7 +63,7 @@
     axios.post('http://localhost:8098/join', values)
     .then(res => {
       console.log(res);
-      window.location.href = '/';
+      window.location.href = '/index';
     })
     .catch(err => {
       console.log(err);

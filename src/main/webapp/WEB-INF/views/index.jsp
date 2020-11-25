@@ -190,6 +190,11 @@
 		.then(res => {
 			console.log(res);
 			alert('로그인 성공!');
+			axios.get('http://localhost:8098/conform', values)
+			.then(res=>{
+				window.location.href = '/';
+			})
+			window.location.href='/';
 		})
 		.catch(err => {
 			console.log(err);
@@ -209,7 +214,7 @@
 				<li><a href="/login">로그인</a></li>
 				<li><a href = '/jointype'>회원가입</a></li>
 				<%}else{%>
-				<li><a href="/logout">로그아웃</a></li>
+				<li><a href="/logout">${userInfo.userId}님 로그아웃</a></li>
 				<%}%>
 				<li><a href = '/reserve'>병원검색</a></li>
 				<li><a href = '/list'>예약확인</a></li>

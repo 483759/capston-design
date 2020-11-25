@@ -184,11 +184,10 @@
       'userPw': userPw
     };
 
-    console.log(values);
-
     axios.post('http://localhost:8098/login', values)
     .then(res => {
-      console.log(res);
+      //console.log(res);
+      console.log("Hi");
       axios.get('http://localhost:8098/conform', values)
       .then(res=>{
         window.location.href = '/';
@@ -202,10 +201,6 @@
     });
   }
 </script>
-  }
-</script>
-<!-- Header -->
-<!--navbar -->
 
 <nav class = "navbar navbar-inverse navbar-fixed-top">
     <div class = "container">
@@ -216,7 +211,7 @@
                 <li><a href="/login">로그인</a></li>
                 <li><a href = '/jointype'>회원가입</a></li>
                 <%}else{%>
-                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/logout">${userInfo.userId}님 로그아웃</a></li>
                 <%}%>
                 <li><a href = '/reserve'>병원검색</a></li>
                 <li><a href = '/list'>예약확인</a></li>
@@ -261,33 +256,6 @@
     <button input type="button" value="join" onclick="location.href='/join'"> join</button>
 </form>
 
-<%--         <div id="wrapper">--%>
-
-<%--            <!-- Banner -->--%>
-<%--               <section id="intro" class="main">--%>
-<%--                  <span class="icon fa-diamond major"></span>--%>
-<%--                  <h2>Login</h2>--%>
-<%--                  <center>--%>
-<%--                  <div id="login_form" class="main">--%>
-<%--                  <form>--%>
-<%--                     <table>--%>
-<%--                        <tr>--%>
-<%--                           <td>ID :</td>--%>
-<%--                           <td><input type="text" name="userId"></td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                           <td>PASSWORD :</td>--%>
-<%--                           <td><input type="password" name="userPw"></td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                           <td><input type="button" value="login" onclick="login()"></td>--%>
-<%--                           <td><input type="button" value="join" onclick="location.href='/join'"></td>--%>
-<%--                        </tr>--%>
-<%--                     </table>--%>
-<%--            --%>
-<%--                  </form>--%>
-<%--               </div>--%>
-</center>
 </section>
 
 

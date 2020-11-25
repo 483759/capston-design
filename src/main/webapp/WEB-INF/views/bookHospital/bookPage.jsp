@@ -161,7 +161,7 @@
                 <li><a href="/login">로그인</a></li>
                 <li><a href = '/jointype'>회원가입</a></li>
                 <%}else{%>
-                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/logout">${userInfo.userId}님 로그아웃</a></li>
                 <%}%>
                 <li><a href = '/reserve'>병원검색</a></li>
                 <li><a href = '/list'>예약확인</a></li>
@@ -189,7 +189,7 @@
             <tr>ed
                 <td>예약자명</td>
                 <td><input type="text" name="name" id="name"
-                           value="" class="form-control"  required /> <br /></td>
+                           value="${userInfo.userName}" class="form-control"  required /> <br /></td>
             </tr>
             <tr>
                 <td>예약 일자</td>
